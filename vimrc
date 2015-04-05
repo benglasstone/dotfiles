@@ -66,12 +66,8 @@ set tm=500
 " Enable syntax highlighting
 syntax enable
 
-try
-    colorscheme desert
-catch
-endtry
-
-set background=dark
+" Colorscheme
+colorscheme badwolf
 
 " Set extra options when running in GUI mode
 if has("gui_running")
@@ -86,6 +82,9 @@ set encoding=utf8
 
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
+
+" => Solarized
+call togglebg#map("<F5>")
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text, tab, and indent related
@@ -272,9 +271,6 @@ set guioptions-=R
 set guioptions-=l
 set guioptions-=L
 
-" Colorscheme
-set background=dark
-" TODO: install some colorschemes
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Turn on persistent undo
@@ -322,7 +318,7 @@ map <leader>nf :NERDTreeFind<cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim-airline config
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:airline_theme="luna"
+let g:airline_theme="badwolf"
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Syntastic
