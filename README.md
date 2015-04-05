@@ -10,13 +10,18 @@ Installation
 ------------------------------
 Clone the dotfiles repository into ~/.dotfiles :
 
-    git clone git@github.com:Josaphat/dotfiles.git ~/.dotfiles
+    git clone --recursive git@github.com:Josaphat/dotfiles.git ~/.dotfiles
 
 Then make ~/.vimrc ~/.vim and ~/.zshrc into symbolic links to the versions in the repository:
 
     ln -s ~/.dotfiles/zshrc ~/.zshrc
     ln -s ~/.dotfiles/vimrc ~/.vimrc
-    ln -s ~/.dotfiles/vim/ ~/.vim/
+    ln -s ~/.dotfiles/vim/ ~/.vim
+
+If you have an older git version or you forgot to use `--recursive` in the clone step:
+
+    git submodule update --init --recursive
+
 
 Problems
 ------------------------------
