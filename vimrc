@@ -323,3 +323,13 @@ map <leader>nf :NERDTreeFind<cr>
 " vim-airline config
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:airline_theme="luna"
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Syntastic
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:syntastic_python_checkers=['pyflakes']
+let g:syntastic_c_checkers=['make']
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
