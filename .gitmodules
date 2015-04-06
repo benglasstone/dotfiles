@@ -21,7 +21,7 @@
 	url = https://github.com/bling/vim-airline.git
 [submodule "vim/bundle/vim-commentary"]
 	path = vim/bundle/vim-commentary
-    url = https://github.com/tpop/vim-commentary.git
+    url = https://github.com/tpope/vim-commentary.git
 [submodule "vim/bundle/syntastic"]
 	path = vim/bundle/syntastic
 	url = https://github.com/scrooloose/syntastic.git
