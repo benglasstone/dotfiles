@@ -6,7 +6,7 @@ antigen use oh-my-zsh
 antigen bundle git
 antigen bundle git-flow
 # Load the theme
-antigen theme agnoster
+antigen theme amuse
 # Tell antigen that you're done
 antigen apply
 

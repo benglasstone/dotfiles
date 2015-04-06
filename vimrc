@@ -7,6 +7,12 @@ set history=700
 filetype plugin on
 filetype indent on
 
+" Turn on Omni completion
+set omnifunc=syntaxcomplete#Complete
+" Close the completion preview window on movement in insert mode or when leaving insert mode
+"autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
+"autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+
 " Set to auto read when a file is changed externally
 set autoread
 
