@@ -342,6 +342,7 @@ let g:airline_theme="badwolf"
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:syntastic_python_checkers=['pyflakes']
 let g:syntastic_c_checkers=['make']
+let g:syntastic_cpp_checkers=['make']
 
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
