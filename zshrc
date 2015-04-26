@@ -15,6 +15,14 @@ antigen apply
 # 21st century terminals
 export TERM="xterm-256color"
 
+if [ -f ~/.dotfiles/custom/environment ]; then
+    source ~/.dotfiles/custom/environment
+fi
+
+if [ -f ~/.dotfiles/custom/aliases ]; then
+    source ~/.dotfiles/custom/aliases
+fi
+
 if [ -f ~/.dotfiles/custom/zshrc_custom ]; then
     source ~/.dotfiles/custom/zshrc_custom
 fi
