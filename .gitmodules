@@ -40,3 +40,6 @@
 [submodule "vim/bundle/bufexplorer"]
 	path = vim/bundle/bufexplorer
 	url = https://github.com/jlanzarotta/bufexplorer.git
+[submodule "vim/bundle/armasm"]
+	path = vim/bundle/armasm
+	url = git@github.com:vim-scripts/armasm.git
