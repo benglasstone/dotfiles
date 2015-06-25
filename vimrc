@@ -13,6 +13,9 @@ set omnifunc=syntaxcomplete#Complete
 "autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
 "autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 
+" Make the shell interactive
+"set shellcmdflag+=i
+
 " Set to auto read when a file is changed externally
 set autoread
 
@@ -351,5 +354,5 @@ set statusline+=%*
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Vim grep
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let Grep_Skip_Dirs = 'RCS CVS SCCS .svn generated'
-set grepprg=/bin/grep\ -nH
+let Grep_Skip_Dirs = 'RCS CVS SCCS .svn generated .git'
+set grepprg=/bin/grep\ -nH\ --exclude=tags\ --exclude="*.swp"\ --exclude-dir=.git
