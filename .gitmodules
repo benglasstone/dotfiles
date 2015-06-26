@@ -43,3 +43,6 @@
 [submodule "vim/bundle/armasm"]
 	path = vim/bundle/armasm
 	url = git@github.com:vim-scripts/armasm.git
+[submodule "vim/bundle/rust.vim"]
+	path = vim/bundle/rust.vim
+	url = https://github.com/rust-lang/rust.vim.git
