@@ -187,7 +187,7 @@ func! DeleteTrailingWS()
     %s/\s\+$//ge
     exe "normal `z"
 endfunc
-autocmd BufWrite *.py :call DeleteTrailingWS()
+" autocmd BufWrite *.py :call DeleteTrailingWS()
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Spell checking
@@ -343,7 +343,7 @@ let g:airline_theme="badwolf"
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Syntastic
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:syntastic_python_checkers=['pyflakes']
+let g:syntastic_python_checkers=['pylint']
 let g:syntastic_c_checkers=['make']
 let g:syntastic_cpp_checkers=['make']
 
@@ -355,4 +355,4 @@ set statusline+=%*
 " => Vim grep
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let Grep_Skip_Dirs = 'RCS CVS SCCS .svn generated .git'
-set grepprg=/bin/grep\ -nH\ --exclude=tags\ --exclude="*.swp"\ --exclude-dir=.git
+set grepprg=/bin/grep\ -nH\ --exclude=tags\ --exclude="*.swp"\ --exclude-dir=".git"
