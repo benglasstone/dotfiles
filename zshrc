@@ -12,8 +12,11 @@ antigen theme amuse
 # Tell antigen that you're done
 antigen apply
 
-# 21st century terminals
-export TERM="xterm-256color"
+# This is meant to guard against nuking TERM if it's set by screen or tmux
+if [[ $TERM == xterm ]]; then
+    # 21st century terminals
+    export TERM="xterm-256color"
+fi
 
 if [ -f ~/.dotfiles/custom/environment ]; then
     source ~/.dotfiles/custom/environment
