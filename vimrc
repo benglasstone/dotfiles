@@ -359,4 +359,9 @@ set statusline+=%*
 " => Vim grep
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let Grep_Skip_Dirs = 'RCS CVS SCCS .svn generated .git'
-set grepprg=/bin/grep\ -nH\ --exclude=tags\ --exclude="*.swp"\ --exclude-dir=".git"
+set grepprg=/bin/grep\ -nHI\ --exclude=tags\ --exclude=\"*.swp\"\ --exclude-dir=\".git\"
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Vim make
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set makeprg=make\ -s
