@@ -15,10 +15,11 @@ else
 fi
 
 # Exuberant ctags with tags for function declarations and definitions in C
-alias exutags='ctags-exuberant --c-kinds=+p --recurse'
+CTAGS_EXECUTABLE=$(which ctags)
+alias exutags="$CTAGS_EXECUTABLE --c-kinds=+p --recurse"
 
 # Ctags for python
-alias pytags='ctags-exuberant --python-kinds=-i --recurse'
+alias pytags="$CTAGS_EXECUTABLE --python-kinds=-i --recurse"
 
 # GNU ARM Toolchain GDB alias
 alias armgdb='arm-none-eabi-gdb -iex "add-auto-load-safe-path .gdbinit"'
