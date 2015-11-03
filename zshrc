@@ -7,7 +7,7 @@ antigen bundle git
 antigen bundle git-flow
 
 # Load the theme
-antigen theme adben
+antigen theme af-magic
 
 # Tell antigen that you're done
 antigen apply
