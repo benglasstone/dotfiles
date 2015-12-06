@@ -7,6 +7,8 @@ set history=700
 filetype plugin on
 filetype indent on
 
+set cino=g0,N-s
+
 " Turn on Omni completion
 set omnifunc=syntaxcomplete#Complete
 " Close the completion preview window on movement in insert mode or when leaving insert mode
