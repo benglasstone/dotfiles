@@ -16,7 +16,7 @@ fi
 
 # Exuberant ctags with tags for function declarations and definitions in C
 CTAGS_EXECUTABLE=$(which ctags)
-alias exutags="$CTAGS_EXECUTABLE --c-kinds=+p --recurse"
+alias exutags="$CTAGS_EXECUTABLE --languages=C,C++ --c-kinds=+p  --fields=+iaS --extra=+q --recurse"
 
 # Ctags for python
 alias pytags="$CTAGS_EXECUTABLE --python-kinds=-i --recurse"
