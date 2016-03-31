@@ -22,6 +22,6 @@ if [ -f ~/.dotfiles/custom/environment ]; then
     source ~/.dotfiles/custom/environment
 fi
 
-if [ -f ~/.dotfiles/custom/zshrc_custom ]; then
-    source ~/.dotfiles/custom/zshrc_custom
+if [ -f ~/.dotfiles/custom/customrc.zsh ]; then
+    source ~/.dotfiles/custom/customrc.zsh
 fi
