@@ -40,3 +40,5 @@ function cake() {
     fi
 }
 
+alias edit=""$EDITOR""
+alias vimclient="gvim --remote "

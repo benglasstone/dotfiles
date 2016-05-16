@@ -7,6 +7,11 @@ set history=700
 filetype plugin on
 filetype indent on
 
+" Associate *.inc with the C++ filetype
+au BufRead,BufNewFile *.inc set filetype=cpp
+au FileType gitcommit set tw=72
+
+
 set cino=g0,N-s
 
 " Turn on Omni completion
@@ -88,6 +93,7 @@ if has("gui_running")
     set guioptions-=e
     set t_Co=256
     set guitablabel=%M\ %t
+    set guifont="Inconsolata-g_Medium_10"
 endif
 
 " Set utf8 as standard encoding and en_US as the standard language
