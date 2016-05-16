@@ -55,3 +55,6 @@
 [submodule "vim/bundle/vim-dispatch"]
 	path = vim/bundle/vim-dispatch
 	url = https://github.com/tpope/vim-dispatch.git
+[submodule "vim/bundle/toml"]
+	path = vim/bundle/toml
+	url = git@github.com:cespare/vim-toml

@@ -1,13 +1,31 @@
+# This file includes several customization points:
+# - To replace what bundles are loaded with antigen, customize:
+#     ~/.dotfiles/custom/antigen_setup.zsh
+# - To change the theme, set it in
+#     ~/.dotfiles/custom/theme.zsh
+# - To add aliases
+# - To do anything else "site-specific" in the zshrc, customize:
+#     ~/.dotfiles/custom/zshrcustom.zsh
 source ~/.dotfiles/antigen/antigen.zsh
 
-# Load the oh-my-zsh library
-antigen use oh-my-zsh
-# Bundles from the default repo
-antigen bundle git
-antigen bundle git-flow
+# Customization point for setting up antigen
+if [ -f ~/.dotfiles/custom/antigen_setup.zsh ]; then
+    source ~/.dotfiles/custom/antigen_setup.zsh
+else
+    # Load the oh-my-zsh library
+    antigen use oh-my-zsh
+    # Bundles from the default repo
+    antigen bundle git
+    antigen bundle git-flow
+fi
 
-# Load the theme
-antigen theme af-magic
+# Theme customization point
+if [ -f ~/.dofiles/custom/theme.zsh ]; then
+    source ~/.dotfiles/custom/theme.zsh
+else
+    # My fav as the default ;)
+    antigen theme af-magic
+fi
 
 # Tell antigen that you're done
 antigen apply
@@ -18,10 +36,9 @@ if [[ $TERM == xterm ]]; then
     export TERM="xterm-256color"
 fi
 
-if [ -f ~/.dotfiles/custom/environment ]; then
-    source ~/.dotfiles/custom/environment
+# Generic customization point for zshrc
+if [ -f ~/.dotfiles/custom/zshrcustom.zsh ]; then
+    source ~/.dotfiles/custom/zshrcustom.zsh
 fi
 
-if [ -f ~/.dotfiles/custom/customrc.zsh ]; then
-    source ~/.dotfiles/custom/customrc.zsh
-fi
+export SOURCED_ZSHRC="YES"
