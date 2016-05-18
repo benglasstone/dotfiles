@@ -1,0 +1,182 @@
+#+TITLE: Emacs Config
+* Removing some of the training wheels
+  I don't need to see the emacs splash screen every time I start
+  emacs.
+
+  And the toolbar is temptation to use the mouse; not to mention the
+  fact that it forces to you to learn (sometimes very strange)
+  iconography.
+
+#+begin_src emacs-lisp :tangle yes
+(setq inhibit-startup-message t)
+(tool-bar-mode -1)
+#+end_src
+
+* Customizations
+  You can put customizations into their own file so that they don't
+  clutter up this one.
+
+#+begin_src emacs-lisp :tangle yes
+;; Keep the customizations in their own file
+(setq custom-file "~/.emacs.d/.emacs-custom.el")
+(load custom-file)
+#+end_src
+
+* Set Up Package Sources
+
+#+begin_src emacs-lisp :tangle yes
+(require 'package)
+(add-to-list 'package-archives
+	     '("melpa" . "http://melpa.org/packages/"))
+(when (< emacs-major-version 24)
+  ;; For important compatibility libraries like cl-lib
+  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages")))
+
+(package-initialize)
+#+end_src
+
+For some reason, a few packages don't specify that they depend on
+the ~cl~ packages, so I preemptively require them.
+
+#+begin_src emacs-lisp :tangle yes
+(require 'cl-lib)
+(require 'cl)
+#+end_src
+
+* Modularization
+  At some point I thought it made a lot of sense to split the init
+  files into little modules based on functionality.  I'm not sure how
+  to do that with org files, but also, most of the packages are
+  heavily dependent on other packages, so splitting up by language
+  environment, by package, or some other scheme I haven't thought of
+  doesn't seem like it would work.  I'd like to see an example of
+  someone doing it, though.  Modular init files is a good ideal to
+  strive for.
+
+#+begin_src emacs-lisp :tangle yes
+;; No modularization for simplicity... (for now)
+;; (add-to-list 'load-path "~/.emacs.d/elisp/")
+#+end_src
+
+* Config
+#+begin_src emacs-lisp :tangle yes
+
+(require 'magit-gh-pulls)
+(add-hook 'magit-mode-hook 'turn-on-magit-gh-pulls)
+
+#+end_src
+
+* Completion and Syntax Checking
+  I've run into a bit of an issue with my setup because the Rtags
+  setup with cmake-ide actually apparently does something to do some
+  syntax checking.  I'm not sure how to turn it off or what turned it
+  on, really, but this setup is most of the way to being just what I
+  want.
+
+#+begin_src emacs-lisp :tangle yes
+
+;; Completion and Syntax Checking
+(require 'company)
+(global-company-mode)
+(require 'irony)
+(require 'flycheck-irony)
+(require 'company-irony)
+
+(add-hook 'c++-mode-hook 'irony-mode)
+(add-hook 'c-mode-hook 'irony-mode)
+(add-hook 'objc-mode-hook 'irony-mode)
+
+(defun my-irony-mode-hook ()
+  (define-key irony-mode-map [remap completion-at-point]
+    'irony-completion-at-point-async)
+  (define-key irony-mode-map [remap complete-symbol]
+    'irony-completion-at-point-async)
+  )
+(add-hook 'irony-mode-hook 'my-irony-mode-hook)
+(add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+
+(add-hook 'c++-mode-hook 'flycheck-mode)
+(add-hook 'c-mode-hook 'flycheck-mode)
+
+(eval-after-load 'company
+  '(add-to-list 'company-backends 'company-irony))
+(eval-after-load 'flycheck
+  '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
+
+(require 'rtags)
+(cmake-ide-setup)
+
+(global-set-key (kbd "<f5>") 'cmake-ide-compile)
+
+#+end_src
+
+* Little Things
+  Configure a bunch of little things that make my life a little bit
+  better.
+
+  Showing matching parenthesis is always nice.  And so is Being able
+  to see what the current column is in the modeline.  Changing tags
+  should be reloaded as a matter of course...
+
+
+#+begin_src emacs-lisp :tangle yes
+;; Little things
+(show-paren-mode t)
+(setq column-number-mode t)
+#+end_src
+
+** TODO Find a way to do TAGS better.  I'm tired of having to remember to re-run it and that it doesn't find stuff in deeper places in the source
+
+#+being_src emacs-lisp :tangle yes
+;; Don't ask to reload new TAGS. Of *course* I want new tags.
+(setq tags-revert-without-query 1)
+#+end_src
+
+* Key Mappings
+#+begin_src emacs-lisp :tangle yes
+(define-key c-mode-base-map (kbd "M-.") 'rtags-find-symbol-at-point)
+(define-key c-mode-base-map (kbd "M-,") 'rtags-find-references-at-point)
+#+end_src
+
+* Appearance
+  The theme is badwolf, and I like powerline.
+#+BEGIN_SRC emacs-lisp :tangle yes
+;; Appearance
+(load-theme 'badwolf)
+(require 'powerline)
+(powerline-default-theme)
+(require 'airline-themes)
+(load-theme 'airline-badwolf)
+#+END_SRC
+
+* EVIL
+  I use EVIL mode to turn emacs into what I consider a more powerful
+  vim.  It doesn't quite do everything (and there are a few very
+  annoying things I've noticed about it, like the escape sequence not
+  working quickly enough sometimes), but it treats me well.
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+(require 'evil)
+(evil-mode 1)
+(require 'evil-magit)
+#+END_SRC
+
+* Org configuration
+#+BEGIN_SRC emacs-lisp :tangle yes
+;; org
+(require 'org)
+(define-key global-map "\C-cl" 'org-store-link)
+(define-key global-map "\C-ca" 'org-agenda)
+(setq org-log-done t)
+
+(setq org-directory "~/Dropbox/org")
+(setq org-mobile-inbox-for-pull "~/Dropbox/org/flagged.org")
+(setq org-mobile-directory "~/Dropbox/Apps/MobileOrg")
+
+(setq org-agenda-files (list "~/Dropbox/org/work.org"
+			     "~/Dropbox/org/home.org"))
+#+END_SRC
+
+;; Local Variables:
+;; eval: (add-hook 'after-save-hook (lambda ()(org-babel-tangle)) nil t)
+;; End:

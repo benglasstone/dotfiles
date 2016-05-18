@@ -1,0 +1,17 @@
+# Ignore everything
+*
+
+# Don't ignore the elisp directory
+!elisp/
+
+# Don't ignore .gitignore or *.org files
+!.gitignore
+!*.org
+
+# And don't ignore .el files
+!*.el
+
+# ... except for these
+init.el
+ede-projects.el
+.emacs-custom.el
