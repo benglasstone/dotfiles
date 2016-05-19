@@ -103,12 +103,44 @@ the ~cl~ packages, so I preemptively require them.
 (eval-after-load 'flycheck
   '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
 
-(require 'rtags)
+;;(require 'rtags)
 (cmake-ide-setup)
-
-(global-set-key (kbd "<f5>") 'cmake-ide-compile)
-
 #+end_src
+
+** Key Mappings
+#+begin_src emacs-lisp :tangle yes
+(global-set-key (kbd "<f5>") 'cmake-ide-compile)
+;;(rtags-enable-standard-keybindings c-mode-base-map)
+;;(rtags-spellcheck-enabled nil)
+;;(rtags-completions-enabled t)
+#+end_src
+
+* C++ Configuration
+#+BEGIN_SRC emacs-lisp :tangle yes
+(setq c-default-style '((java-mode . "java")
+	    ("awk-mode" . "awk")
+	    (other . "stroustrup")))
+(setq c-basic-offset 4)
+(c-set-offset 'innamespace 0)
+(c-set-offset 'inline-open 0)
+
+;; Comments should wrap at 80 characters
+(setq-default fill-column 80)
+;; and they should do it automatically
+(add-hook 'c-mode-common-hook 'auto-fill-mode)
+
+;; Show trailing whitespace in code
+(add-hook 'c-mode-common-hook (lambda ()
+                                (setq-local show-trailing-whitespace t)
+                                (linum-mode)))
+
+;; No tabs
+(setq-default indent-tabs-mode nil)
+
+;; Treat .h files as C++
+(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+
+#+END_SRC
 
 * Little Things
   Configure a bunch of little things that make my life a little bit
@@ -132,12 +164,6 @@ the ~cl~ packages, so I preemptively require them.
 (setq tags-revert-without-query 1)
 #+end_src
 
-* Key Mappings
-#+begin_src emacs-lisp :tangle yes
-(define-key c-mode-base-map (kbd "M-.") 'rtags-find-symbol-at-point)
-(define-key c-mode-base-map (kbd "M-,") 'rtags-find-references-at-point)
-#+end_src
-
 * Appearance
   The theme is badwolf, and I like powerline.
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -149,6 +175,8 @@ the ~cl~ packages, so I preemptively require them.
 (load-theme 'airline-badwolf)
 #+END_SRC
 
+** TODO Collapse some of the modes so that I can see more of the line.
+
 * EVIL
   I use EVIL mode to turn emacs into what I consider a more powerful
   vim.  It doesn't quite do everything (and there are a few very
@@ -159,6 +187,19 @@ the ~cl~ packages, so I preemptively require them.
 (require 'evil)
 (evil-mode 1)
 (require 'evil-magit)
+
+#+END_SRC
+
+** Key Bindings
+#+BEGIN_SRC emacs-lisp :tangle yes
+(define-key evil-normal-state-map (kbd "C-w q") 'delete-window)
+
+;; Easy Movement between windows
+(define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
+(define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
+(define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
+(define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
+
 #+END_SRC
 
 * Org configuration
