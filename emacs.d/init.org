@@ -59,12 +59,23 @@ the ~cl~ packages, so I preemptively require them.
 #+end_src
 
 * Config
+** magit
+  Magit is great.
 #+begin_src emacs-lisp :tangle yes
-
-(require 'magit-gh-pulls)
-(add-hook 'magit-mode-hook 'turn-on-magit-gh-pulls)
-
+  (require 'magit-gh-pulls)
+  (add-hook 'magit-mode-hook 'turn-on-magit-gh-pulls)
 #+end_src
+
+** Temporary files
+  I'm tired of emacs' temporary files showing up in my working tree.  This puts
+  them into a tmp directory where they can easily be destroyed later.
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (setq backup-directory-alist
+        `((".*" . ,temporary-file-directory)))
+  (setq auto-save-file-name-transforms
+        `((".*" ,temporary-file-directory t)))
+#+END_SRC
 
 * Completion and Syntax Checking
   I've run into a bit of an issue with my setup because the Rtags
@@ -97,6 +108,9 @@ the ~cl~ packages, so I preemptively require them.
 
 (add-hook 'c++-mode-hook 'flycheck-mode)
 (add-hook 'c-mode-hook 'flycheck-mode)
+
+(add-hook 'c++-mode-hook 'flyspell-prog-mode)
+(add-hook 'c-mode-hook 'flyspell-prog-mode)
 
 (eval-after-load 'company
   '(add-to-list 'company-backends 'company-irony))
@@ -131,8 +145,7 @@ the ~cl~ packages, so I preemptively require them.
 
 ;; Show trailing whitespace in code
 (add-hook 'c-mode-common-hook (lambda ()
-                                (setq-local show-trailing-whitespace t)
-                                (linum-mode)))
+                                (setq-local show-trailing-whitespace t)))
 
 ;; No tabs
 (setq-default indent-tabs-mode nil)
@@ -141,6 +154,8 @@ the ~cl~ packages, so I preemptively require them.
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 
 #+END_SRC
+
+* Custom Functions
 
 * Little Things
   Configure a bunch of little things that make my life a little bit
@@ -175,20 +190,30 @@ the ~cl~ packages, so I preemptively require them.
 (load-theme 'airline-badwolf)
 #+END_SRC
 
-** TODO Collapse some of the modes so that I can see more of the line.
+  Relative line numbers are great. It's easier to move around using prefixes and
+  that kind of thing.
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+(require 'relative-line-numbers)
+(add-hook 'prog-mode-hook 'relative-line-numbers-mode t)
+(add-hook 'prog-mode-hook 'line-number-mode t)
+#+END_SRC
 
 * EVIL
-  I use EVIL mode to turn emacs into what I consider a more powerful
-  vim.  It doesn't quite do everything (and there are a few very
-  annoying things I've noticed about it, like the escape sequence not
-  working quickly enough sometimes), but it treats me well.
+  I use EVIL mode to turn emacs into what I consider a more powerful vim.  It
+  doesn't quite do everything (and there are a few very annoying things I've
+  noticed about it, like the escape sequence not working quickly enough
+  sometimes), but it treats me well.
 
 #+BEGIN_SRC emacs-lisp :tangle yes
 (require 'evil)
 (evil-mode 1)
 (require 'evil-magit)
-
 #+END_SRC
+
+*** Sidenote
+It's easy enough to fix the escape key sequence problem in terminal mode by
+doing some tmux configuration.
 
 ** Key Bindings
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -216,6 +241,26 @@ the ~cl~ packages, so I preemptively require them.
 
 (setq org-agenda-files (list "~/Dropbox/org/work.org"
 			     "~/Dropbox/org/home.org"))
+#+END_SRC
+
+* Final Things
+Stuff that needs to happen at the end of everything else.
+
+** Diminish Mode line
+Collapse some of the stuff in the modeline so that it's readable at half-screen
+sizes.  We use the diminish package to help us do that.
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+;; Modeline cleanup
+(require 'diminish)
+(diminish 'undo-tree-mode "UT")
+(diminish 'company-mode "Cp")
+(diminish 'irony-mode "Fe")
+(diminish 'flycheck-mode "Fc")
+(diminish 'auto-fill-mode "Af")
+(diminish 'abbrev-mode "Abv")
+(diminish 'auto-revert-mode "Rv")
+(diminish 'flyspell-prog-mode)
 #+END_SRC
 
 ;; Local Variables:
