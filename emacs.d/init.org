@@ -17,7 +17,7 @@
   clutter up this one.
 
 #+begin_src emacs-lisp :tangle yes
-;; Keep the customizations in their own file
+;; Keep customizations in their own file
 (setq custom-file "~/.emacs.d/.emacs-custom.el")
 (load custom-file)
 #+end_src
@@ -84,7 +84,7 @@ the ~cl~ packages, so I preemptively require them.
   on, really, but this setup is most of the way to being just what I
   want.
 
-#+begin_src emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp :tangle yes
 
 ;; Completion and Syntax Checking
 (require 'company)
@@ -109,25 +109,22 @@ the ~cl~ packages, so I preemptively require them.
 (add-hook 'c++-mode-hook 'flycheck-mode)
 (add-hook 'c-mode-hook 'flycheck-mode)
 
-(add-hook 'c++-mode-hook 'flyspell-prog-mode)
-(add-hook 'c-mode-hook 'flyspell-prog-mode)
-
 (eval-after-load 'company
   '(add-to-list 'company-backends 'company-irony))
 (eval-after-load 'flycheck
   '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
 
-;;(require 'rtags)
+(require 'rtags)
 (cmake-ide-setup)
-#+end_src
+#+END_SRC
 
 ** Key Mappings
-#+begin_src emacs-lisp :tangle yes
+#+BEGIN_SRC emacs-lisp :tangle yes
 (global-set-key (kbd "<f5>") 'cmake-ide-compile)
-;;(rtags-enable-standard-keybindings c-mode-base-map)
+(rtags-enable-standard-keybindings c-mode-base-map)
 ;;(rtags-spellcheck-enabled nil)
 ;;(rtags-completions-enabled t)
-#+end_src
+#+END_SRC
 
 * C++ Configuration
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -179,43 +176,28 @@ the ~cl~ packages, so I preemptively require them.
 (setq tags-revert-without-query 1)
 #+end_src
 
-* Appearance
-  The theme is badwolf, and I like powerline.
-#+BEGIN_SRC emacs-lisp :tangle yes
-;; Appearance
-(load-theme 'badwolf)
-(require 'powerline)
-(powerline-default-theme)
-(require 'airline-themes)
-(load-theme 'airline-badwolf)
-#+END_SRC
-
-  Relative line numbers are great. It's easier to move around using prefixes and
-  that kind of thing.
-
-#+BEGIN_SRC emacs-lisp :tangle yes
-(require 'relative-line-numbers)
-(add-hook 'prog-mode-hook 'relative-line-numbers-mode t)
-(add-hook 'prog-mode-hook 'line-number-mode t)
-#+END_SRC
-
-* EVIL
+* EVIL (Must go before powerline)
   I use EVIL mode to turn emacs into what I consider a more powerful vim.  It
   doesn't quite do everything (and there are a few very annoying things I've
   noticed about it, like the escape sequence not working quickly enough
   sometimes), but it treats me well.
 
+  This needs to go before powerline configuration because of a clash between
+  elscreen (used by evil-tabs) and powerline.
+
 #+BEGIN_SRC emacs-lisp :tangle yes
 (require 'evil)
-(evil-mode 1)
 (require 'evil-magit)
+(evil-mode 1)
 #+END_SRC
 
 *** Sidenote
 It's easy enough to fix the escape key sequence problem in terminal mode by
 doing some tmux configuration.
 
-** Key Bindings
+** Window Bindings
+   Closing windows with `C-w q`.  Moving between windows with C-<movement key>.
+
 #+BEGIN_SRC emacs-lisp :tangle yes
 (define-key evil-normal-state-map (kbd "C-w q") 'delete-window)
 
@@ -224,8 +206,55 @@ doing some tmux configuration.
 (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
 (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
 (define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
-
 #+END_SRC
+
+** Tabs
+   It's easier to keep track of tabs than it is to keep track of emacs frames.
+
+   #+BEGIN_SRC emacs-lisp :tangle yes
+   (global-evil-tabs-mode t)
+   #+END_SRC
+
+** Leader Key
+   Comma as the leader key.
+#+BEGIN_SRC emacs-lisp :tangle yes
+(global-evil-leader-mode)
+(evil-leader/set-leader ",")
+#+END_SRC
+
+
+* Appearance
+  The theme is badwolf, and I like powerline.
+
+  #+BEGIN_SRC emacs-lisp :tangle yes
+  ;; Appearance
+  (load-theme 'badwolf)
+  (require 'powerline)
+  (powerline-center-evil-theme)
+  (setq powerline-display-buffer-size nil)
+  (setq powerline-display-mule-info nil)
+  (setq powerline-display-hud nil)
+  (require 'airline-themes)
+  (load-theme 'airline-badwolf)
+  #+END_SRC
+
+  Relative line numbers are great. It's easier to move around using prefixes and
+  that kind of thing.
+
+  #+BEGIN_SRC emacs-lisp :tangle yes
+  (require 'relative-line-numbers)
+  (add-hook 'prog-mode-hook 'relative-line-numbers-mode t)
+  (add-hook 'prog-mode-hook 'line-number-mode t)
+  #+END_SRC
+
+** Persistent search highlighting
+   Vim-like persistent search highlighting.  Clear it with <leader>-RET.
+   #+BEGIN_SRC emacs-lisp :tangle yes
+   (require 'evil-search-highlight-persist)
+   (global-evil-search-highlight-persist t)
+
+   (evil-leader/set-key "RET" 'evil-search-highlight-persist-remove-all)
+   #+END_SRC
 
 * Org configuration
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -243,8 +272,16 @@ doing some tmux configuration.
 			     "~/Dropbox/org/home.org"))
 #+END_SRC
 
+Auto-fill mode in org-mode.
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+(add-hook 'org-mode-hook 'auto-fill-mode)
+#+END_SRC
+
 * Final Things
 Stuff that needs to happen at the end of everything else.
+
+** TODO Make this section unnecessary with some "after" function
 
 ** Diminish Mode line
 Collapse some of the stuff in the modeline so that it's readable at half-screen
@@ -253,14 +290,21 @@ sizes.  We use the diminish package to help us do that.
 #+BEGIN_SRC emacs-lisp :tangle yes
 ;; Modeline cleanup
 (require 'diminish)
-(diminish 'undo-tree-mode "UT")
-(diminish 'company-mode "Cp")
-(diminish 'irony-mode "Fe")
-(diminish 'flycheck-mode "Fc")
-(diminish 'auto-fill-mode "Af")
-(diminish 'abbrev-mode "Abv")
-(diminish 'auto-revert-mode "Rv")
-(diminish 'flyspell-prog-mode)
+(diminish 'undo-tree-mode)
+;;(diminish 'undo-tree-mode "UT")
+(diminish 'undo-tree-mode)
+;;(diminish 'company-mode "Cp")
+;;(diminish 'irony-mode "Fe")
+;;(diminish 'flycheck-mode "Fc")
+(diminish 'company-mode)
+(diminish 'irony-mode)
+(diminish 'flycheck-mode)
+;;(diminish 'auto-fill-mode "Af")
+(diminish 'auto-fill-mode)
+;;(diminish 'abbrev-mode "Abv")
+(diminish 'abbrev-mode)
+;;(diminish 'auto-revert-mode "Rv")
+(diminish 'auto-revert-mode)
 #+END_SRC
 
 ;; Local Variables:
