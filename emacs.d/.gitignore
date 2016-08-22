@@ -12,6 +12,4 @@
 !*.el
 
 # ... except for these
-init.el
-ede-projects.el
-.emacs-custom.el
+emacs-custom.el
