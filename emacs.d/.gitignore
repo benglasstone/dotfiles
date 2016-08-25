@@ -2,7 +2,7 @@
 *
 
 # Don't ignore the elisp directory
-!elisp/
+!lisp/
 
 # Don't ignore .gitignore or *.org files
 !.gitignore

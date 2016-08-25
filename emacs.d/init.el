@@ -141,6 +141,9 @@
 
 ;; TODO: Add better TAGS handling
 
+;; magit is a great git porcelain
+(use-package magit :ensure t)
+
 ;; Tidy the up the mode line by diminishing the Abbrev minor mode
 ;; indicator in the mode line.
 (use-package abbrev
@@ -156,6 +159,8 @@
   (moe-dark))
 
 (require 'init-c++)
+
+(require 'jos-utils)
 
 (message "init.el complete")
 
