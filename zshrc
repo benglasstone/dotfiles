@@ -36,6 +36,14 @@ if [[ $TERM == xterm ]]; then
     export TERM="xterm-256color"
 fi
 
+# Stuff gets weird with the path sometimes
+# Load it here in addition to .zprofile
+if [ -f ~/.dotfiles/custom/path.zsh ]; then
+    source ~/.dotfiles/custom/path.zsh
+fi
+
+typeset -U PATH
+
 # Generic customization point for zshrc
 if [ -f ~/.dotfiles/custom/zshrcustom.zsh ]; then
     source ~/.dotfiles/custom/zshrcustom.zsh
