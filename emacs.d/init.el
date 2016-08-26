@@ -92,8 +92,8 @@
 ;; M-x irony-cdb-autosetup-compile-options myself when I first pull up
 ;; a buffer.  It might be a lack of understanding of how use-package
 ;; should be used.  If it works better by skipping use-package
-;; entirely, I might just go with that and put this into a separate
-;; file.
+;; entirely, I might just go with that and put configuration of irony
+;; into a separate file.
 (use-package irony
   :ensure t
   :init
@@ -143,6 +143,9 @@
 
 ;; magit is a great git porcelain
 (use-package magit :ensure t)
+
+;; I edit markdown quite often
+(use-package markdown-mode :ensure t)
 
 ;; Tidy the up the mode line by diminishing the Abbrev minor mode
 ;; indicator in the mode line.
