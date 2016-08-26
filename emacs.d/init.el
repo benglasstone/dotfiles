@@ -139,6 +139,21 @@
   :config
   (add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
 
+(use-package rust-mode
+  :ensure t
+  :init
+  (add-hook 'rust-mode-hook
+	    (lambda ()
+	      (setq-local show-trailing-whitespace t)
+	      (setq-local indent-tabs-mode nil))))
+(use-package racer
+  :ensure t
+  :after rust-mode
+  :init
+  (setq racer-rust-src-path "/usr/src/rust/src")
+  (add-hook 'rust-mode-hook #'racer-mode)
+  (add-hook 'racer-mode-hook #'eldoc-mode))
+
 ;; TODO: Add better TAGS handling
 
 ;; magit is a great git porcelain
