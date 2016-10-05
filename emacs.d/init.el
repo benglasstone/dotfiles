@@ -33,6 +33,14 @@
 ;;; Code:
 
 ;;;; General editor configuration
+
+
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; We already do this in our `lisp/init-elpa.el' file.
+;(package-initialize)
+
 (tool-bar-mode -1)			; We don't need all those
 					; fancy buttons
 ;; By default, parens are highlighted when you insert a `)`.  We want
@@ -139,6 +147,11 @@
   :config
   (add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
 
+;; Integrate clang-format
+(load "/usr/share/clang/clang-format.el")
+(global-set-key [C-M-tab] 'clang-format-region)
+
+;; RUST
 (use-package rust-mode
   :ensure t
   :init
@@ -153,6 +166,12 @@
   (setq racer-rust-src-path "/usr/src/rust/src")
   (add-hook 'rust-mode-hook #'racer-mode)
   (add-hook 'racer-mode-hook #'eldoc-mode))
+
+;; scheme/guile
+(use-package geiser :ensure t)
+
+;; go-lang
+(use-package go-mode :ensure t)
 
 ;; TODO: Add better TAGS handling
 
