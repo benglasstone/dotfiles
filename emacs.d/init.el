@@ -181,6 +181,8 @@
 ;; I edit markdown quite often
 (use-package markdown-mode :ensure t)
 
+(use-package cmake-font-lock :ensure t)
+
 ;; Tidy the up the mode line by diminishing the Abbrev minor mode
 ;; indicator in the mode line.
 (use-package abbrev
