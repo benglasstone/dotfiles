@@ -40,5 +40,6 @@ function cake() {
     fi
 }
 
+alias cppgrep='grep --include="*.h" --include="*.cpp" --include="*.c" '
 alias edit=""$EDITOR""
 alias vimclient="gvim --remote "
