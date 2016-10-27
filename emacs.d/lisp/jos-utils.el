@@ -30,6 +30,14 @@ This currently doesn't try to generate the macro name for you."
   (previous-line)
   (previous-line))
 
+(defun jos/string-to-array (strgiven)
+  "Transforms the given text into a C/C++ character array
+  inserted at the current location of Point."
+  (interactive "sString: ")
+  (seq-do (lambda (char)
+	    "Insert each character as a C-style char literal"
+	    (insert "'" char "', ")) strgiven))
+
 (provide 'jos-utils)
 
 ;;; jos-utils.el ends here
