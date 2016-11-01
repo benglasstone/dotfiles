@@ -147,9 +147,10 @@
   :config
   (add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
 
-;; Integrate clang-format
-(load "/usr/share/clang/clang-format.el")
-(global-set-key [C-M-tab] 'clang-format-region)
+;; Integrate clang-format, but not if we're on windows.
+(unless (eq system-type 'windows-nt)
+  (load "/usr/share/clang/clang-format.el")
+  (global-set-key [C-M-tab] 'clang-format-region))
 
 ;; RUST
 (use-package rust-mode
