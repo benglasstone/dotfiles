@@ -124,12 +124,12 @@
 (use-package company
   :ensure t
   :diminish "cmp"
-  :config
+  :init
   (global-company-mode))
 (use-package company-irony
   :ensure t
   :after company
-  :config
+  :init
   (add-to-list 'company-backends 'company-irony))
 
 ;; Flycheck gives us quick diagnostics for our C/C++ programs.  If we
@@ -181,6 +181,7 @@
 ;; I edit markdown quite often
 (use-package markdown-mode :ensure t)
 
+;; A lot of projects use CMake
 (use-package cmake-font-lock :ensure t)
 
 ;; Tidy the up the mode line by diminishing the Abbrev minor mode
@@ -190,6 +191,7 @@
   :config
   (if (file-exists-p abbrev-file-name)
       (quietly-read-abbrev-file)))
+
 
 ;; Appearance
 (use-package moe-theme
