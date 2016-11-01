@@ -199,6 +199,8 @@
 
 (require 'init-c++)
 
+(require 'init-org)
+
 (require 'jos-utils)
 
 (message "init.el complete")
