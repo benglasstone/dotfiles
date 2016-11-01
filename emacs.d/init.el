@@ -184,6 +184,16 @@
 ;; A lot of projects use CMake
 (use-package cmake-font-lock :ensure t)
 
+;; scala - Leaving out `:ensure t' because I'm only using it at home for
+;; a functional programming course on coursera
+(use-package scala-mode
+  :init
+  (add-hook 'scala-mode-hook
+	    (lambda ()
+	      (setq-local show-trailing-whitespace t)
+	      (setq-local indent-tabs-mode nil))))
+(use-package sbt-mode)
+
 ;; Tidy the up the mode line by diminishing the Abbrev minor mode
 ;; indicator in the mode line.
 (use-package abbrev
