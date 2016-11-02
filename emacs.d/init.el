@@ -78,6 +78,9 @@
 ;; use-package.el
 (require 'init-elpa)
 
+;; Auto-fill mode
+(add-hook 'text-mode-hook 'turn-on-auto-fill)
+
 ;; Use the projectile package which helps us get around in our
 ;; project.
 ;; Find the documentation at http://batsov.com/projectile/
