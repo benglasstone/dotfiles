@@ -36,4 +36,6 @@
 
 (setq org-default-notes-file (concat org-directory "/inbox.org"))
 
+(add-hook 'org-mode-hook 'flyspell-mode)
+
 (provide 'init-org)

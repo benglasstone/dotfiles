@@ -152,6 +152,10 @@
   (load "/usr/share/clang/clang-format.el")
   (global-set-key [C-M-tab] 'clang-format-region))
 
+;; Spell checking on windows
+(when (eq system-type 'windows-nt)
+  (setq ispell-program-name "aspell"))
+
 ;; RUST
 (use-package rust-mode
   :ensure t
