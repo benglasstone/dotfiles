@@ -34,7 +34,7 @@
 ;;				 ("projects.org" :maxlevel . 1)
 ;;				 ("waiting.org" :maxlevel . 1))))
 
-(setq org-default-notes-file (concat org-directory "/inbox.org"))
+(setq org-default-notes-file (concat org-directory "/gtd.org"))
 
 (add-hook 'org-mode-hook 'flyspell-mode)
 

@@ -72,6 +72,9 @@
 ;; (require) the things we put into that directory.
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 
+;; Prefer UTF-8
+(prefer-coding-system 'utf-8)
+
 ;;;; Package configurations
 
 ;; Load our file that configures the package manager and
