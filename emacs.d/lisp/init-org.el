@@ -29,12 +29,11 @@
 
 (setq org-log-done t)
 
-;;(setq org-refile-targets (quote (("NextActions.org" :maxlevel . 1)
-;;				 ("someday.org" :level . 2)
-;;				 ("projects.org" :maxlevel . 1)
-;;				 ("waiting.org" :maxlevel . 1))))
+(setq org-refile-targets (quote (("NextActions.org" :maxlevel . 1)
+				 ("someday.org" :maxlevel . 1)
+				 ("calendar.org" :maxlevel . 1))))
 
-(setq org-default-notes-file (concat org-directory "/gtd.org"))
+(setq org-default-notes-file (concat org-directory "/inbox.org"))
 
 (add-hook 'org-mode-hook 'flyspell-mode)
 
