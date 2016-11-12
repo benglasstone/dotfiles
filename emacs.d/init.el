@@ -100,6 +100,12 @@
 
 ;; TODO: Add helm-projectile?
 
+;; Modern C++ highlighting
+(use-package modern-cpp-font-lock
+  :ensure t
+  :init
+  (add-hook 'c++-mode-hook #'modern-c++-font-lock-mode))
+
 ;; Irony is a great backbone for a better C/C++ editing experience.
 ;; It can provide code completion as well as syntax checking (not
 ;; entirely on its own).  I've run into a quirk where I have to run
