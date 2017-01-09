@@ -203,6 +203,7 @@
 
 ;; scala - Leaving out `:ensure t' because I'm only using it at home for
 ;; a functional programming course on coursera
+(use-package ensime :pin melpa-stable)
 (use-package scala-mode
   :init
   (add-hook 'scala-mode-hook
