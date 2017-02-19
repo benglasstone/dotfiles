@@ -26,7 +26,10 @@
   "Inserts C/C++ header guards at the current location of Point.
 This currently doesn't try to generate the macro name for you."
   (interactive "sGuard macro: ")
-  (insert "#ifndef " (upcase macroname) "\n#define " (upcase macroname) "\n\n#endif\n")
+  (beginning-of-buffer)
+  (insert "#ifndef " (upcase macroname) "\n#define " (upcase macroname) "\n")
+  (end-of-buffer)
+  (insert "\n#endif\n")
   (previous-line)
   (previous-line))
 
