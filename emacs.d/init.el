@@ -171,7 +171,7 @@
 
 ;; Integrate clang-format, but not if we're on windows.
 (unless (eq system-type 'windows-nt)
-  (load "/usr/share/clang/clang-format.el")
+  (load-library "clang-format.el")
   (global-set-key [C-M-tab] 'clang-format-region))
 
 ;; Spell checking on windows
