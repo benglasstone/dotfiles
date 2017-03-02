@@ -38,6 +38,28 @@ This currently doesn't try to generate the macro name for you."
 	    "Insert each character as a C-style char literal"
 	    (insert "'" char "', ")) strgiven))
 
+(defun jos/c++-RO5 (classname)
+  "Inserts the 5 special member functions for the C++ class named
+CLASSNAME into the current location of Point, all explicitly
+defaulted."
+  (interactive "sClass name: ")
+  ;; 1. destructor
+  (newline-and-indent)
+  (insert "virtual ~" classname "() = default;")
+  (newline-and-indent)
+  ;; 2. Copy constructor
+  (insert classname "(const " classname "&) = default;")
+  (newline-and-indent)
+  ;; 3. Move constructor
+  (insert classname "(" classname "&&) = default;")
+  (newline-and-indent)
+  ;; 4. Copy-assignment operator
+  (insert classname "& operator=(const " classname " &) = default;")
+  (newline-and-indent)
+  ;; 5. Move-assignment operator
+  (insert classname "& operator=(" classname " &&) = default;")
+  (newline-and-indent))
+
 (provide 'jos-utils)
 
 ;;; jos-utils.el ends here

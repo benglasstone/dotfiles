@@ -72,6 +72,10 @@
 ;; (require) the things we put into that directory.
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 
+;; Don't commit any secrets like API tokens or secret keys.  Keep them
+;; all in a separate file
+(load (locate-user-emacs-file "emacs-secrets.el"))
+
 ;; Prefer UTF-8
 (prefer-coding-system 'utf-8)
 
@@ -143,6 +147,12 @@
   :after company
   :init
   (add-to-list 'company-backends 'company-irony))
+(use-package company-irony-c-headers
+  :ensure t
+  :after irony company
+  :init
+  (add-to-list 'company-backends 'company-irony-c-headers))
+
 
 ;; Flycheck gives us quick diagnostics for our C/C++ programs.  If we
 ;; hook it up to the irony backend it's a breeze to set up.  This will
@@ -231,6 +241,15 @@
   :config
   (if (file-exists-p abbrev-file-name)
       (quietly-read-abbrev-file)))
+
+
+(use-package
+  ansi-color :ensure t
+  :config
+  (defun colorize-compilation-buffer ()
+    (let ((inhibit-read-only t))
+      (ansi-color-apply-on-region (point-min) (point-max))))
+  (add-hook 'compilation-filter-hook 'colorize-compilation-buffer))
 
 
 ;; Appearance
