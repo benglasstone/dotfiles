@@ -73,8 +73,8 @@
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 
 ;; Don't commit any secrets like API tokens or secret keys.  Keep them
-;; all in a separate file
-(load (locate-user-emacs-file "emacs-secrets.el"))
+;; all in a separate file. If it doesn't exist that's fine.
+(load (locate-user-emacs-file "emacs-secrets.el") 'noerror)
 
 ;; Prefer UTF-8
 (prefer-coding-system 'utf-8)
