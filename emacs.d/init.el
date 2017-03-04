@@ -210,6 +210,12 @@
   (add-hook 'c-mode-hook 'rtags-start-process-unless)
   (rtags-enable-standard-keybindings))
 
+;; Set up yasnippet
+(use-package yasnippet
+  :ensure t
+  :init
+  (yas-global-mode 1))
+
 ;; magit is a great git porcelain
 (use-package magit :ensure t)
 
