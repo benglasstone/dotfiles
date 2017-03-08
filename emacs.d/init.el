@@ -236,18 +236,6 @@
 	      (setq-local indent-tabs-mode nil))))
 (use-package sbt-mode)
 
-(use-package magic-latex-buffer :ensure t)
-(use-package tex :ensure auctex
-  :init
-  (setq TeX-view-program-selection '((output-pdf "xdg-open")))
-	;; (((output-dvi has-no-display-manager) "dvi2tty")
-	;; 			    ((output-dvi style-pstricks)
-	;; 			     "dvips and gv")
-	;; 			    (output-dvi "xdvi")
-	;; 			    (output-pdf "xdg-open")
-	;; 			    (output-html "xdg-open")))
-  (setq TeX-PDF-mode t))
-
 ;; Tidy the up the mode line by diminishing the Abbrev minor mode
 ;; indicator in the mode line.
 (use-package abbrev
