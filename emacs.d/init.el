@@ -162,7 +162,8 @@
   :init
   (add-hook 'c++-mode-hook 'flycheck-mode)
   (add-hook 'c-mode-hook 'flycheck-mode)
-  (add-hook 'objc-mode-hook 'flycheck-mode))
+  (add-hook 'objc-mode-hook 'flycheck-mode)
+  (add-hook 'rust-mode 'flycheck-mode))
 (use-package flycheck-irony
   :ensure t
   :after flycheck irony
@@ -179,20 +180,31 @@
   (setq ispell-program-name "aspell"))
 
 ;; RUST
+(use-package flycheck-rust
+  :ensure t
+  :config
+  (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
+(use-package cargo :ensure t)
 (use-package rust-mode
   :ensure t
+  :after cargo
   :init
   (add-hook 'rust-mode-hook
 	    (lambda ()
 	      (setq-local show-trailing-whitespace t)
-	      (setq-local indent-tabs-mode nil))))
+	      (setq-local indent-tabs-mode nil)))
+  (add-hook 'rust-mode-hook
+	    (lambda ()
+	      (local-set-key [C-M-tab] 'rust-format-buffer)))
+  (add-hook 'rust-mode-hook 'cargo-minor-mode))
 (use-package racer
   :ensure t
   :after rust-mode
   :init
-  (setq racer-rust-src-path "/usr/src/rust/src")
   (add-hook 'rust-mode-hook #'racer-mode)
-  (add-hook 'racer-mode-hook #'eldoc-mode))
+  (add-hook 'racer-mode-hook #'eldoc-mode)
+  (add-hook 'racer-mode-hook #'company-mode))
+(use-package cargo :ensure t)
 
 ;; scheme/guile
 (use-package geiser :ensure t)
