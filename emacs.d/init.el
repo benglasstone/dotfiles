@@ -112,12 +112,7 @@
 
 ;; Irony is a great backbone for a better C/C++ editing experience.
 ;; It can provide code completion as well as syntax checking (not
-;; entirely on its own).  I've run into a quirk where I have to run
-;; M-x irony-cdb-autosetup-compile-options myself when I first pull up
-;; a buffer.  It might be a lack of understanding of how use-package
-;; should be used.  If it works better by skipping use-package
-;; entirely, I might just go with that and put configuration of irony
-;; into a separate file.
+;; entirely on its own).
 (use-package irony
   :ensure t
   :init
