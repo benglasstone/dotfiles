@@ -1,7 +1,9 @@
-# Ignore everything
-*
+# Ignore all directories
+/*/
+/*
 
-# Don't ignore the elisp directory
+# Don't ignore the snippets and elisp directories
+!snippets/
 !lisp/
 
 # Don't ignore .gitignore or *.org files
