@@ -30,6 +30,7 @@
 (c-set-offset 'inline-open 0)
 (add-hook 'c-mode-common-hook
 	  (lambda ()
+	    (setq fill-column 80)
 	    (setq-local show-trailing-whitespace t)
 	    (setq-local column-number-mode t)
 	    (setq-local indent-tabs-mode nil)))
