@@ -40,6 +40,12 @@ function cake() {
     fi
 }
 
-alias cppgrep='grep --include="*.h" --include="*.cpp" --include="*.c" '
+alias cppgrep='grep --line-number --include="*.h" --include="*.cpp" --include="*.c" '
 alias edit=""$EDITOR""
+alias editc="emacsclient -nc"
 alias vimclient="gvim --remote "
+alias firmware="cd ~/dev/signet/firmware"
+alias charger="cd ~/dev/signet/charger"
+alias Apollo2Prod="cd ~/dev/signet/firmware/build/Apollo2ProdBoard"
+alias Apollo2Dev="cd ~/dev/signet/firmware/build/Apollo2DevBoard"
+alias sb="~/dev/signet/firmware/scripts/build_all.sh"

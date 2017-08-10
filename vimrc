@@ -15,7 +15,7 @@ au FileType gitcommit set tw=72
 set cino=g0,N-s
 
 " Turn on Omni completion
-set omnifunc=syntaxcomplete#Complete
+"set omnifunc=syntaxcomplete#Complete
 " Close the completion preview window on movement in insert mode or when leaving insert mode
 "autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
 "autocmd InsertLeave * if pumvisible() == 0|pclose|endif
@@ -373,3 +373,9 @@ set grepprg=/bin/grep\ -nHI\ --exclude=tags\ --exclude=\"*.swp\"\ --exclude-dir=
 " => Vim make
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set makeprg=make\ -s
+
+" turn on mouse mode
+set mouse=a
+
+set splitbelow
+set splitright

@@ -167,7 +167,7 @@
 
 ;; Integrate clang-format, but not if we're on windows.
 (unless (eq system-type 'windows-nt)
-  (load-library "clang-format.el")
+  (load "/usr/share/emacs/site-lisp/clang-format-3.8/clang-format.el")
   (global-set-key [C-M-tab] 'clang-format-region))
 
 ;; Spell checking on windows
@@ -210,12 +210,12 @@
 ;; To actually use rtags, make sure you have the daemon installed and
 ;; in your path, make sure you have a compile_comamnds.json file for
 ;; your project, and run `rc -J /directory/with/compilecommands/'
-(use-package rtags
-  :ensure t
-  :init
-  (add-hook 'c++-mode-hook 'rtags-start-process-unless-running)
-  (add-hook 'c-mode-hook 'rtags-start-process-unless)
-  (rtags-enable-standard-keybindings))
+;; (use-package rtags
+;;   :ensure t
+;;   :init
+;;   (add-hook 'c++-mode-hook 'rtags-start-process-unless-running)
+;;   (add-hook 'c-mode-hook 'rtags-start-process-unless)
+;;   (rtags-enable-standard-keybindings))
 
 ;; Set up yasnippet
 (use-package yasnippet
@@ -225,6 +225,7 @@
 
 ;; magit is a great git porcelain
 (use-package magit :ensure t)
+(global-set-key (kbd "C-c g") 'magit-status)
 
 ;; I edit markdown quite often
 (use-package markdown-mode :ensure t)
@@ -262,10 +263,10 @@
 
 
 ;; Appearance
-(use-package moe-theme
+(use-package smyx-theme
   :ensure t
   :config
-  (moe-dark))
+  (load-theme 'smyx t))
 
 (require 'init-c++)
 

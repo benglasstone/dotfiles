@@ -24,7 +24,7 @@ if [ -f ~/.dofiles/custom/theme.zsh ]; then
     source ~/.dotfiles/custom/theme.zsh
 else
     # My fav as the default ;)
-    antigen theme af-magic
+    antigen theme flazz
 fi
 
 # Tell antigen that you're done
