@@ -91,16 +91,16 @@
 ;; Use the projectile package which helps us get around in our
 ;; project.
 ;; Find the documentation at http://batsov.com/projectile/
-(use-package projectile
-  :ensure t
-  :diminish projectile-mode
-  :config
-  (projectile-global-mode)
-  ;; Projectile supports caching so that it doesn't have to re-index a
+;;(use-package projectile
+;;  :ensure t
+;;  :diminish projectile-mode
+;;  :config
+;;  (projectile-global-mode)
+;;  ;; Projectile supports caching so that it doesn't have to re-index a
   ;; project all the time (which can be slow).  It is enabled by
   ;; default when the "native" Emacs Lisp indexing implementation is
   ;; used but we'll enable it everywhere because why not?
-  (setq projectile-enable-caching t))
+;;  (setq projectile-enable-caching t))
 
 ;; TODO: Add helm-projectile?
 
@@ -166,13 +166,13 @@
   (add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
 
 ;; Integrate clang-format, but not if we're on windows.
-(unless (eq system-type 'windows-nt)
-  (load "/usr/share/emacs/site-lisp/clang-format-3.8/clang-format.el")
-  (global-set-key [C-M-tab] 'clang-format-region))
+;;(unless (eq system-type 'windows-nt)
+;;  (load "/usr/share/emacs/site-lisp/clang-format-3.8/clang-format.el")
+;;  (global-set-key [C-M-tab] 'clang-format-region))
 
 ;; Spell checking on windows
-(when (eq system-type 'windows-nt)
-  (setq ispell-program-name "aspell"))
+;;(when (eq system-type 'windows-nt)
+;;  (setq ispell-program-name "aspell"))
 
 ;; RUST
 (use-package flycheck-rust
@@ -275,5 +275,15 @@
 (require 'jos-utils)
 
 (message "init.el complete")
+
+(add-to-list 'load-path "/opt/ros/kinetic/share/emacs/site-lisp")
+;; or whatever your install space is + "/share/emacs/site-lisp"
+(require 'rosemacs-config)
+
+(require 'yaml-mode)
+(add-to-list 'auto-mode-alist '("\\.yaml\\'" . yaml-mode))
+
+; roslaunch highlighting
+(add-to-list 'auto-mode-alist '("\\.launch$" . xml-mode))
 
 ;;; init.el ends here
